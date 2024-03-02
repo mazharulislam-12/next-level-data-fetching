@@ -1,13 +1,17 @@
 import React from "react";
 
 const PostPage = async () => {
-  const res = await fetch("http://localhost:5000/posts");
+  const res = await fetch("http://localhost:5000/posts", {
+    next: {
+      revalidate: 5,
+    },
+  });
   const posts = await res.json();
   console.log(posts);
 
   return (
     <div className="w-full">
-      <h2 className="text-2xl">Total post: {posts.length} </h2>
+      <h2 className="text-2xl">Total posts: {posts.length} </h2>
 
       {posts.map((post) => (
         <div
